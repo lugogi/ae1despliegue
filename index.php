@@ -62,19 +62,45 @@ if ($_SESSION['letras_acertadas'] == $_SESSION['palabra']) {
 </head>
 <body>
     <main class="contenedor">
-        <h1>Juego del Ahorcado</h1>
+        <header class="cabecera">
+            <h1>Juego del Ahorcado</h1>
+            <p>Adivina la palabra secreta antes de quedarte sin vidas.</p>
+        </header>
+
         <section class="panel">
             <?php if ($mensaje != '') { ?>
                 <p class="aviso"><?php echo $mensaje; ?></p>
             <?php } ?>
-            <p>Palabra secreta: <?php echo $_SESSION['letras_acertadas']; ?></p>
-            <p>Vidas restantes: <?php echo $_SESSION['vidas']; ?></p>
+
+            <p class="titulo">Palabra secreta</p>
+            <p class="palabra">
+                <?php
+                for ($i = 0; $i < strlen($_SESSION['letras_acertadas']); $i++) {
+                    echo '<span>' . $_SESSION['letras_acertadas'][$i] . '</span>';
+                }
+                ?>
+            </p>
+
+            <p class="vidas">Vidas restantes: <strong><?php echo $_SESSION['vidas']; ?></strong></p>
+
             <form method="post">
                 <label for="letra">Introduce una letra:</label>
-                <input type="text" name="letra" id="letra" maxlength="1" required>
-                <button type="submit">Adivinar</button>
+                <div class="fila">
+                    <input type="text" name="letra" id="letra" maxlength="1" required>
+                    <button type="submit">Adivinar</button>
+                </div>
             </form>
-            <p>Letras usadas: <?php echo implode(', ', $_SESSION['letras_usadas']); ?></p>
+
+            <p class="usadas">
+                Letras usadas:
+                <?php
+                if (count($_SESSION['letras_usadas']) == 0) {
+                    echo 'ninguna';
+                } else {
+                    echo implode(', ', $_SESSION['letras_usadas']);
+                }
+                ?>
+            </p>
         </section>
     </main>
 </body>
