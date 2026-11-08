@@ -16,10 +16,23 @@ body {
     padding: 4rem 0;
 }
 
+.cabecera {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 6px solid #e45b3f;
+}
+
 h1 {
-    margin: 0 0 0.8rem;
-    font-size: 2.2rem;
+    margin: 0 0 0.4rem;
+    font-size: 2.4rem;
     line-height: 1.1;
+}
+
+.cabecera p,
+.final p {
+    margin: 0;
+    color: #63717c;
+    font-size: 1.1rem;
 }
 
 .panel {
@@ -27,6 +40,72 @@ h1 {
     background-color: #fffdf8;
     border: 1px solid #ddd7cc;
     box-shadow: 10px 10px 0 #d8c9b5;
+}
+
+.aviso {
+    margin-top: 0;
+    padding: 0.8rem 1rem;
+    color: #8e2015;
+    background-color: #fbe4df;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.titulo,
+.vidas,
+.usadas,
+label {
+    font-family: Arial, sans-serif;
+}
+
+.titulo {
+    margin: 0 0 0.8rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.palabra {
+    margin: 0 0 1.2rem;
+}
+
+.palabra span {
+    display: inline-block;
+    min-width: 2.2rem;
+    margin: 0.15rem;
+    padding: 0.45rem 0.2rem;
+    text-align: center;
+    font-size: 1.6rem;
+    background-color: #fff;
+    border: 1px solid #ddd7cc;
+    border-bottom: 4px solid #16222d;
+}
+
+.vidas {
+    margin: 0 0 1.2rem;
+    font-size: 1rem;
+}
+
+.vidas strong {
+    font-size: 1.6rem;
+}
+
+.fila {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.45rem;
+}
+
+input {
+    width: 4rem;
+    padding: 0.7rem;
+    color: #16222d;
+    background-color: #fff;
+    border: 1px solid #ddd7cc;
+    font: 1.3rem Georgia, "Times New Roman", serif;
+    text-align: center;
+    text-transform: lowercase;
 }
 
 button {
@@ -43,8 +122,17 @@ button:focus-visible {
     background-color: #e45b3f;
 }
 
+.usadas {
+    margin-bottom: 0;
+    color: #63717c;
+}
+
 .final {
     text-align: center;
+}
+
+.final h1 {
+    margin-bottom: 0.8rem;
 }
 
 .final p {
@@ -61,7 +149,20 @@ button:focus-visible {
     border-top: 6px solid #2f7d4a;
 }
 
-
 .perdido {
     border-top: 6px solid #b33b3b;
+}
+
+@media (max-width: 560px) {
+    .contenedor {
+        padding: 2rem 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .panel {
+        box-shadow: 6px 6px 0 #d8c9b5;
+    }
 }

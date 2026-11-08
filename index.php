@@ -12,13 +12,15 @@ if (!isset($_SESSION['palabra'])) {
     $_SESSION['letras_usadas'] = [];
 }
 
+$mensaje = '';
+
 // Procesar la letra enviada
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['letra'])) {
     $letra = strtolower($_POST['letra']);
 
     // Verificar si la letra ya se ha usado
     if (in_array($letra, $_SESSION['letras_usadas'])) {
-        echo "Ya has usado la letra '$letra'. Intenta con otra.<br>";
+        $mensaje = "Ya has usado la letra '$letra'. Intenta con otra.";
     } else {
         // Añadir la letra a las usadas
         $_SESSION['letras_usadas'][] = $letra;
@@ -52,17 +54,52 @@ if ($_SESSION['letras_acertadas'] == $_SESSION['palabra']) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ahorcado</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Juego del Ahorcado</h1>
-    <p>Palabra secreta: <?php echo $_SESSION['letras_acertadas']; ?></p>
-    <p>Vidas restantes: <?php echo $_SESSION['vidas']; ?></p>
-    <form method="post">
-        <label for="letra">Introduce una letra:</label>
-        <input type="text" name="letra" id="letra" maxlength="1" required>
-        <button type="submit">Adivinar</button>
-    </form>
-    <p>Letras usadas: <?php echo implode(', ', $_SESSION['letras_usadas']); ?></p>
+    <main class="contenedor">
+        <header class="cabecera">
+            <h1>Juego del Ahorcado</h1>
+            <p>Adivina la palabra secreta antes de quedarte sin vidas.</p>
+        </header>
+
+        <section class="panel">
+            <?php if ($mensaje != '') { ?>
+                <p class="aviso"><?php echo $mensaje; ?></p>
+            <?php } ?>
+
+            <p class="titulo">Palabra secreta</p>
+            <p class="palabra">
+                <?php
+                for ($i = 0; $i < strlen($_SESSION['letras_acertadas']); $i++) {
+                    echo '<span>' . $_SESSION['letras_acertadas'][$i] . '</span>';
+                }
+                ?>
+            </p>
+
+            <p class="vidas">Vidas restantes: <strong><?php echo $_SESSION['vidas']; ?></strong></p>
+
+            <form method="post">
+                <label for="letra">Introduce una letra:</label>
+                <div class="fila">
+                    <input type="text" name="letra" id="letra" maxlength="1" required>
+                    <button type="submit">Adivinar</button>
+                </div>
+            </form>
+
+            <p class="usadas">
+                Letras usadas:
+                <?php
+                if (count($_SESSION['letras_usadas']) == 0) {
+                    echo 'ninguna';
+                } else {
+                    echo implode(', ', $_SESSION['letras_usadas']);
+                }
+                ?>
+            </p>
+        </section>
+    </main>
 </body>
 </html>
